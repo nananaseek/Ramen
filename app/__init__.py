@@ -4,7 +4,7 @@ from app.config import settings
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title=settings.APP_NAME)
+    app = FastAPI(title=settings.APP_NAME, docs_url="/")
 
     register_tortoise(
         app,
@@ -29,4 +29,4 @@ def get_db_uri(user, passwd, host, db):
 
 def register_views(app: FastAPI):
     from app.src.RamenAPI import ramen_views
-    app.include_router(ramen_views, tags=["manga"])
+    app.include_router(ramen_views, prefix="/manga", tags=["manga"])
